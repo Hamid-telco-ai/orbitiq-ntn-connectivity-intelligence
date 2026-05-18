@@ -278,9 +278,6 @@ NTN NR Impacts on HARQ Operation
 **R1-1806750**  
 Considerations on Random Access for NTN
 
-**Kodheli et al.**  
-Satellite Communications in the New Space Era: A Survey and Future Challenges
-
 **O-RAN Alliance**
 Use Cases and AI/ML Architecture Specifications
 
