@@ -210,23 +210,160 @@ G_{array}
 
 ---
 
-## Example Run
+# Results & Validation
 
-Run baseline:
+The proposed framework was evaluated using a **3-satellite LEO NTN constellation** with:
 
-```bash
-python ntn_beam_calibration_multisat.py
+- Earth-Moving Cell (EMC) beam evolution
+- Multi-satellite mobility
+- Release-18 inspired Conditional Handover (CHO)
+- Future-SINR prediction
+- RF protection mechanisms
+
+Simulation output demonstrated successful satellite transitions:
+
+```text
+S1 → S2 → S3
 ```
 
-Run predictive mobility:
+instead of unrealistic static attachment behavior.
 
-```bash
-python ntn_beam_calibration_multisat.py \
---d2-cho \
---use-moving-refs \
---future-sinr-margin-db 2 \
---num-sats 3 \
---sat-spacing-s 150
+---
+
+## Simulation Configuration
+
+| Parameter | Value |
+|---|---:|
+| Carrier Frequency | 2 GHz |
+| Bandwidth | 5 MHz |
+| Altitude | 1500 km |
+| Duration | 300 sec |
+| Satellites | 3 |
+| Satellite spacing | 150 sec |
+| Users | 100 |
+| Conditional HO | Enabled |
+| Future-SINR prediction | Enabled |
+| EMC moving cells | Enabled |
+
+---
+
+## Key Performance Indicators
+
+| Metric | Result |
+|---|---:|
+| Average SINR | **35.97 dB** |
+| Average Elevation | **86.49°** |
+| Average Off-axis Angle | **2.45°** |
+| Average Delay | **5.01 ms** |
+| Total Handovers | **588** |
+| Predictive CHO events | **30** |
+| Outage Users | **0** |
+| Highest SINR | **42.37 dB** |
+
+---
+
+## Link Quality Distribution
+
+| MCS | Users |
+|---|---:|
+| 256QAM | 100 |
+
+The framework maintained:
+
+- 100% high-quality connectivity
+- zero outage users
+- stable high-order modulation
+
+This indicates effective beam selection and mobility control. :contentReference[oaicite:1]{index=1}
+
+---
+
+# Satellite Mobility Evolution
+
+The serving satellite dynamically evolved during simulation:
+
+| Time (s) | S1 | S2 | S3 |
+|---|---:|---:|---:|
+| 0 |100|0|0|
+| 80 |51|49|0|
+|100 |1|99|0|
+|110 |0|100|0|
+|220 |0|75|25|
+|230 |0|44|56|
+|250 |0|0|100|
+|300 |0|0|100|
+
+Observed mobility path:
+
+```text
+Initial state
+
+S1
+ ↓
+
+Mid-orbit transition
+
+S2
+ ↓
+
+Final transition
+
+S3
+```
+
+This behavior resembles realistic LEO mobility where users are continuously transferred across moving satellite footprints. :contentReference[oaicite:2]{index=2}
+
+---
+
+# Handover Intelligence
+
+| Trigger Reason | Events |
+|---|---:|
+| Future-SINR Predictive CHO | 30 |
+| RF Fallback Beam Selection | 465 |
+| RF Link Protection | 93 |
+| Stay on Serving Beam | 2412 |
+
+The system avoided unnecessary handovers while still performing predictive mobility actions when future beam quality degradation was detected. :contentReference[oaicite:3]{index=3}
+
+---
+
+# Average SINR by Satellite
+
+| Satellite | Average SINR |
+|---|---:|
+| S1 |24.39 dB|
+| S2 |24.80 dB|
+| S3 |26.45 dB|
+
+Performance remained stable across satellite transitions with minimal quality degradation. :contentReference[oaicite:4]{index=4}
+
+---
+
+## Key Observations
+
+✓ Multi-satellite transitions successfully modeled  
+✓ Earth-Moving Cell behavior validated  
+✓ Predictive mobility triggered successfully  
+✓ No user outages observed  
+✓ Stable beam quality maintained  
+✓ Future-SINR based CHO operational  
+
+---
+
+## Generated Outputs
+
+```text
+advanced_ntn_results.csv
+
+final_ue_sinr_by_beam.png
+final_sinr_histogram.png
+sinr_vs_off_axis.png
+sinr_vs_elevation.png
+sinr_vs_doppler.png
+avg_sinr_over_time.png
+handover_events_over_time.png
+d2_sinr_cho_triggers_over_time.png
 ```
 
 ---
