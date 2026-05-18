@@ -207,29 +207,6 @@ G_{array}
 
 ---
 
-## Simulation Outputs
-
-OrbitIQ automatically generates:
-
-```text
-advanced_ntn_results.csv
-```
-
-and:
-
-```text
-final_ue_sinr_by_beam.png
-final_sinr_histogram.png
-sinr_vs_off_axis.png
-sinr_vs_elevation.png
-sinr_vs_doppler.png
-avg_sinr_over_time.png
-handover_events_over_time.png
-d2_sinr_cho_triggers_over_time.png
-```
-
----
-
 ## Example Run
 
 Run baseline:
