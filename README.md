@@ -1,5 +1,8 @@
 # OrbitIQ NTN Connectivity Intelligence
 
+<img width="1536" height="1024" alt="7f085692-3ebe-45a1-b9ab-93aa17fe5827" src="https://github.com/user-attachments/assets/db098e3b-7813-4137-bfe2-55a6ce9c9983" />
+
+
 A physics-based **multi-satellite Non-Terrestrial Network (NTN)** framework for modeling **LEO mobility, Earth-Moving Cells (EMCs), beam-level connectivity, predictive handovers, and future connectivity intelligence**.
 
 Traditional satellite platforms primarily provide **visibility** and **coverage maps**. OrbitIQ moves beyond static coverage estimation and predicts **where and when connectivity actually works**.
