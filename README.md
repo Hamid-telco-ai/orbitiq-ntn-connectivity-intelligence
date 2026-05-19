@@ -4,11 +4,11 @@
 <img src="assets/orbitiq_banner.png" width="100%">
 </p>
 
-A physics-based **multi-satellite NTN digital twin and connectivity intelligence framework** for modeling **LEO mobility, Earth-Moving Cells (EMC), beam-level RF serviceability, OrbitIQ-LHT mobility intelligence, and AI-assisted NTN decision systems.**
+<p align="center">
+<b>From Coverage Visibility → Connectivity Intelligence</b>
+</p>
 
----
-
-## Overview
+A physics-based **multi-satellite Non-Terrestrial Network (NTN)** framework for modeling **LEO mobility, Earth-Moving Cells (EMC), beam-level RF serviceability, OrbitIQ-LHT mobility intelligence, and AI-assisted connectivity intelligence systems.**
 
 Traditional satellite systems answer:
 
@@ -23,10 +23,14 @@ OrbitIQ answers:
 Where and when will connectivity actually work?
 ```
 
+---
+
+# Overview
+
 OrbitIQ combines:
 
 - Multi-satellite LEO constellation evolution
-- Earth-Moving Cell (EMC) beam mobility
+- Earth-Moving Cell (EMC) mobility
 - RF link-budget modeling
 - Beam-level serviceability
 - OrbitIQ-LHT mobility intelligence
@@ -34,57 +38,90 @@ OrbitIQ combines:
 - SINR-aware mobility
 - NTN digital twin visualization
 - AI recommendation engine
+- Connectivity intelligence dashboard
+
+The objective is to transition from:
+
+```text
+Visibility
+      ↓
+Coverage
+      ↓
+Connectivity Intelligence
+```
 
 ---
 
 # System Architecture
 
 ```text
-LEO constellation
-      ↓
-EMC beam evolution
-      ↓
+Multi-satellite LEO constellation
+                ↓
+Earth-Moving Cell beam evolution
+                ↓
 Beam candidate generation
-      ↓
+                ↓
 RF link calculation
-      ↓
+                ↓
 SINR + serviceability estimation
-      ↓
+                ↓
 OrbitIQ-LHT mobility engine
-      ↓
-Inter-satellite handover
-      ↓
-Digital Twin + Decision Engine
+                ↓
+Inter-satellite handover execution
+                ↓
+Digital Twin + AI Decision Engine
 ```
+
+---
+
+# Multi-Satellite Mobility
+
+Unlike static single-satellite approaches, OrbitIQ supports:
+
+- Multiple satellites
+- Dynamic orbital movement
+- Satellite spacing
+- Cross-satellite mobility evolution
+- Beam migration behavior
+
+Example:
+
+```text
+S1 → S2 → S3
+```
+
+representing realistic satellite progression.
 
 ---
 
 # Earth-Moving Cell (EMC)
 
-OrbitIQ models moving cells attached to satellites.
+OrbitIQ models moving beam footprints attached to satellites.
 
-UE–beam distance:
+UE-to-beam distance:
 
-D(t)=||x_UE - x_beam(t)||
-
-Moving beam centers evolve as:
-
-x_beam(t)=f(x_satellite(t), beam_offset)
-
-Satellite progression:
-
-θ(t)=ωt+φ
-
-where:
-
-- ω = angular velocity
-- φ = phase offset
-
-Satellite evolution:
-
-```text
-S1 → S2 → S3
+```math
+D(t)=||x_{UE}-x_{beam}(t)||
 ```
+
+Beam evolution:
+
+```math
+x_{beam}(t)=f(x_{satellite}(t),beam_{offset})
+```
+
+Satellite angular evolution:
+
+```math
+\theta(t)=\omega t+\phi
+```
+
+Where:
+
+| Parameter | Description |
+|---|---|
+| ω | angular velocity |
+| φ | phase offset |
 
 ---
 
@@ -92,22 +129,26 @@ S1 → S2 → S3
 
 ## Free Space Path Loss
 
-FSPL:
+```math
+FSPL(dB)=32.45+20log_{10}(d)+20log_{10}(f)
+```
 
-FSPL(dB)=32.45+20log10(d)+20log10(f)
+Where:
 
-where:
-
-- d : distance (km)
-- f : frequency (MHz)
+| Parameter | Description |
+|---|---|
+| d | distance (km) |
+| f | frequency (MHz) |
 
 ---
 
 ## Received Power
 
-P_rx:
+Implemented link-budget:
 
-P_rx=EIRP−FSPL+G_sat+G_UE−L_atm−L_fading
+```math
+P_{rx}=EIRP-FSPL+G_{sat}+G_{UE}-L_{atm}-L_{fading}
+```
 
 Implemented terms:
 
@@ -121,137 +162,173 @@ Implemented terms:
 
 ## Atmospheric Loss
 
-Used implementation:
+Implemented:
 
-L_atm=0.08/sin(elevation)
+```math
+L_{atm}=0.08/\sin(elevation)
+```
 
 with:
 
-elevation>2° clipping
+```text
+elevation > 2°
+```
+
+clipping.
 
 ---
 
 ## Doppler Shift
 
-f_d=v_r/λ
+```math
+f_d=v_r/\lambda
+```
 
-where:
+Where:
 
-- vr = radial velocity
-- λ = wavelength
+| Parameter | Description |
+|---|---|
+| vr | radial velocity |
+| λ | carrier wavelength |
 
 ---
 
 ## Propagation Delay
 
+```math
 Delay=d/c
-
-where:
-
-- c = speed of light
+```
 
 ---
 
 # Beam Gain Model
 
-Total gain:
+Overall UE gain:
 
-G_total=G_element+G_array
+```math
+G_{UE}=G_{element}+G_{array}
+```
 
-Sub‑6 implementation:
+Sub-6 implementation:
 
-|Parameter|Value|
+| Parameter | Value |
 |---|---:|
-|Panels|1|
-|Array|1×2|
-|NF|7 dB|
+| Panels | 1 |
+| Array | 1×2 |
+| Noise Figure | 7 dB |
 
 Ku/Ka implementation:
 
-|Parameter|Value|
+| Parameter | Value |
 |---|---:|
-|Panels|2|
-|Array|2×4|
-|Element gain|5 dBi|
+| Panels | 2 |
+| Array | 2×4 |
+| Element Gain | 5 dBi |
 
 ---
 
 # Interference and SINR
 
-Noise:
+Thermal noise:
 
+```math
 N=kTB
+```
 
 SINR:
 
-SINR=P_rx/(I+N)
+```math
+SINR=P_{rx}/(I+N)
+```
 
 dB domain:
 
-SINR_dB=P_rx−10log10(I+N)
+```math
+SINR_{dB}=P_{rx}-10log_{10}(I+N)
+```
 
 Implemented:
 
 - reuse-one interference
-- fading
 - beam overlap effects
+- fading
 - off-axis degradation
 
 ---
 
 # OrbitIQ-LHT Mobility Intelligence
 
-OrbitIQ-LHT is the mobility engine developed for EMC NTN systems.
+OrbitIQ-LHT is the mobility framework designed for **EMC NTN systems**.
 
 Implemented:
 
-- A3 mobility
-- Γ mobility intelligence
-- TTT
-- inter-satellite handovers
-- mobility-wave prediction
-- serviceability-aware decisions
+✅ A3 mobility logic  
+✅ Γ mobility intelligence  
+✅ Time-to-Trigger (TTT)  
+✅ Inter-satellite handovers  
+✅ Mobility-wave prediction  
+✅ Serviceability-aware decisions  
 
-Decision rule:
+---
 
-P_T(t)>P_S(t)+HOM+Γ_ST
+## OrbitIQ-LHT Decision Rule
 
-where:
+```math
+P_T(t)>P_S(t)+HOM+\Gamma_{S,T}
+```
 
-- PT = target beam quality
-- PS = serving beam quality
-- HOM = handover margin
-- Γ = OrbitIQ intelligence term
+Where:
+
+| Parameter | Description |
+|---|---|
+| PT | target beam quality |
+| PS | serving beam quality |
+| HOM | handover margin |
+| Γ | OrbitIQ intelligence term |
 
 ---
 
 ## Distance Evolution
 
-Serving:
+Serving trend:
 
-ΔD_S=D_S(t)-D_S(t-1)
+```math
+\Delta D_S=D_S(t)-D_S(t-1)
+```
 
-Target:
+Target trend:
 
-ΔD_T=D_T(t)-D_T(t-1)
+```math
+\Delta D_T=D_T(t)-D_T(t-1)
+```
 
-Mobility trend:
+Mobility evolution:
 
-ξ_ST=ΔD_T/ΔD_S
+```math
+\xi_{ST}=\Delta D_T/\Delta D_S
+```
 
-OrbitIQ extension:
+OrbitIQ enhancement:
 
-Γ_unclipped=α ξ_ST
+```math
+\Gamma_{unclipped}=\alpha \xi_{ST}
+```
 
-Γ=max(min(Γ_unclipped,Γ_max),Γ_min)
+```math
+\Gamma=
+max(
+min(\Gamma_{unclipped},\Gamma_{max}),
+\Gamma_{min}
+)
+```
 
-This stabilizes mobility decisions.
+This stabilizes mobility decisions and avoids excessive handovers.
 
 ---
 
 # Serviceability Logic
 
-OrbitIQ moves beyond visibility.
+OrbitIQ extends beyond visibility.
 
 Decision dimensions:
 
@@ -261,54 +338,113 @@ Decision dimensions:
 - mobility stability
 - satellite transitions
 
-MCS selection:
+Supported MCS:
 
-256QAM
-64QAM
-16QAM
-QPSK
-Outage
+- 256QAM
+- 64QAM
+- 16QAM
+- QPSK
+- Outage
 
 ---
 
-# Digital Twin
+# OrbitIQ Digital Twin
+
+OrbitIQ includes a command-center style dashboard.
+
+### Live Connectivity Intelligence Map
 
 Features:
 
-- Live connectivity map
-- UE heat maps
-- beam footprints
-- mobility arcs
-- handover trajectories
-- AI decision engine
-- risk estimation
+- Satellite visualization
+- Beam footprints
+- SINR heat layers
+- UE clusters
+- Mobility arcs
+- Handover trajectories
+
+---
+
+### OrbitIQ Decision Engine
+
+Provides:
+
+- Connectivity risk estimation
+- Live network event feed
+- AI recommendations
+- Serving layer analysis
+- Satellite load visualization
+- Mobility intelligence
 
 ---
 
 # Simulation Configuration
 
-|Parameter|Value|
+| Parameter | Value |
 |---|---:|
-|Frequency|2 GHz|
-|Bandwidth|10 MHz|
-|Altitude|600 km|
-|Users|100|
-|Satellites|3|
-|Spacing|60 sec|
-|EMC|Enabled|
-|OrbitIQ-LHT|Enabled|
+| Frequency | 2 GHz |
+| Bandwidth | 10 MHz |
+| Altitude | 600 km |
+| Users | 100 |
+| Satellites | 3 |
+| Satellite spacing | 60 sec |
+| EMC | Enabled |
+| OrbitIQ-LHT | Enabled |
+| TTT | Enabled |
 
 ---
 
 # KPI Results
 
-|Metric|Result|
+| Metric | Result |
 |---|---:|
-|Average SINR|33 dB|
-|Outages|0|
-|Handovers|18|
-|Predictive events|3|
-|Dominant satellite|S3|
+| Average SINR | 33 dB |
+| Average Off-axis | 14° |
+| Outages | 0 |
+| Handovers | 18 |
+| Predictive events | 3 |
+| Dominant satellite | S3 |
+
+---
+
+# Satellite Mobility Evolution
+
+| Time(s) | S1 | S2 | S3 |
+|---|---:|---:|---:|
+|0|100|0|0|
+|50|72|28|0|
+|80|22|78|0|
+|100|0|58|42|
+|120|0|0|100|
+
+Observed:
+
+```text
+Initial
+ S1
+ ↓
+Transition
+ S2
+ ↓
+Final
+ S3
+```
+
+---
+
+# Project Structure
+
+```bash
+orbitiq-ntn-connectivity-intelligence/
+
+├── app.py
+├── orbitiq_digital_twin_engine.py
+├── ntn_beam_calibration_multisat.py
+├── requirements.txt
+├── README.md
+├── LICENSE
+├── assets/
+```
 
 ---
 
@@ -319,18 +455,23 @@ Features:
 Predict:
 
 - where connectivity exists
-- where outages emerge
 - where service degrades
-- where mobility actions should occur
+- where handovers occur
+- where outages emerge
+- where connectivity intelligence should act
 
 ---
 
 # References
 
-3GPP TR 38.811
+- **3GPP TR 38.811**  
+  Study on NR to support Non-Terrestrial Networks
 
-3GPP Release‑18 NTN mobility
+- **3GPP Release-18 NTN Mobility Studies**
 
-EMC NTN mobility studies
+- **EMC NTN mobility studies and location-aware mobility concepts**
 
-O‑RAN AI/ML specifications
+- **O-RAN Alliance AI/ML specifications**
+
+- **ITU-R P.525**  
+  Free Space Path Loss model
