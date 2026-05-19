@@ -261,12 +261,12 @@ OrbitIQ-LHT is the mobility framework designed for **EMC NTN systems**.
 
 Implemented:
 
-✅ A3 mobility logic  
-✅ Γ mobility intelligence  
-✅ Time-to-Trigger (TTT)  
-✅ Inter-satellite handovers  
-✅ Mobility-wave prediction  
-✅ Serviceability-aware decisions  
+- A3 mobility logic  
+- Γ mobility intelligence  
+- Time-to-Trigger (TTT)  
+- Inter-satellite handovers  
+- Mobility-wave prediction  
+- Serviceability-aware decisions  
 
 ---
 
