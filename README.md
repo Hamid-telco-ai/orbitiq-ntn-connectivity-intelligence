@@ -1,11 +1,24 @@
 # OrbitIQ NTN Connectivity Intelligence
 
-<img width="1536" height="1024" alt="7f085692-3ebe-45a1-b9ab-93aa17fe5827" src="https://github.com/user-attachments/assets/db098e3b-7813-4137-bfe2-55a6ce9c9983" />
+<p align="center">
+<img src="assets/orbitiq_banner.png" width="100%">
+</p>
 
+A physics-based **multi-satellite Non-Terrestrial Network (NTN)** framework for modeling **LEO mobility, Earth-Moving Cells (EMCs), beam-level connectivity, OrbitIQ-LHT mobility intelligence, and AI-driven connectivity serviceability.**
 
-A physics-based **multi-satellite Non-Terrestrial Network (NTN)** framework for modeling **LEO mobility, Earth-Moving Cells (EMCs), beam-level connectivity, predictive handovers, and future connectivity intelligence**.
+Traditional satellite platforms primarily provide:
 
-Traditional satellite platforms primarily provide **visibility** and **coverage maps**. OrbitIQ moves beyond static coverage estimation and predicts **where and when connectivity actually works**.
+```text
+Visibility + Coverage
+```
+
+OrbitIQ moves toward:
+
+```text
+Visibility → Serviceability → Connectivity Intelligence
+```
+
+predicting **where and when connectivity actually works.**
 
 ---
 
@@ -14,18 +27,15 @@ Traditional satellite platforms primarily provide **visibility** and **coverage 
 OrbitIQ integrates:
 
 - Multi-satellite LEO constellation modeling
-- Earth-Moving Cell (EMC) beam mobility
+- Earth-Moving Cell (EMC) mobility
 - RF propagation and link budgets
 - Beam-level serviceability analysis
-- Future SINR prediction
-- Release-18 inspired Conditional Handover (CHO)
-- Predictive mobility intelligence
-
-The objective is to transition from:
-
-```text
-Visibility → Coverage → Connectivity Intelligence
-```
+- OrbitIQ Location Handover Triggering (OrbitIQ-LHT)
+- A3 + Γ + Time-to-Trigger mobility intelligence
+- Multi-satellite mobility evolution
+- AI recommendation engine
+- Connectivity intelligence dashboard
+- Interactive digital twin visualization
 
 ---
 
@@ -33,355 +43,69 @@ Visibility → Coverage → Connectivity Intelligence
 
 ```text
 Multi-satellite LEO constellation
-        ↓
-EMC moving beam footprints
-        ↓
-UE evaluates satellite-beam candidates
-        ↓
-Reference-location prediction
-        ↓
-Release-18 D2 preparation region
-        ↓
-Future SINR estimation
-        ↓
-Conditional handover execution
-        ↓
-Connectivity Intelligence
+              ↓
+Earth-Moving Cell beam evolution
+              ↓
+UE evaluates beam/satellite candidates
+              ↓
+Distance evolution tracking
+              ↓
+OrbitIQ-LHT mobility intelligence
+              ↓
+A3 + Γ + Time-to-Trigger logic
+              ↓
+Inter-satellite mobility execution
+              ↓
+Connectivity Intelligence Dashboard
 ```
 
 ---
 
-## Key Features
+## OrbitIQ Mobility Intelligence
 
-### Multi-Satellite LEO Simulation
+OrbitIQ-LHT implements:
 
-Unlike static single-satellite models, OrbitIQ supports:
+✅ A3 mobility logic  
+✅ Γ mobility intelligence  
+✅ Time-to-Trigger (TTT)  
+✅ Inter-satellite mobility management  
+✅ Mobility wave prediction  
+✅ Connectivity serviceability awareness  
 
-- Multiple satellites
-- Dynamic orbital movement
-- Satellite spacing
-- Cross-satellite mobility evolution
-
-Example:
-
-```text
-S1 → S2 → S3
-```
-
-representing realistic satellite progression over time.
-
----
-
-### Earth-Moving Cell (EMC) Modeling
-
-Beam footprints continuously move over Earth due to LEO satellite motion.
-
-Beam positions evolve through:
-
-- satellite local coordinate frames
-- beam offset geometry
-- Earth-surface projections
-- moving reference locations
-
-This follows NTN moving-cell assumptions discussed in Release-17 and Release-18 studies.
-
----
-
-### Advanced Beam-Level Mobility
-
-The framework performs:
-
-- beam candidate selection
-- future link prediction
-- handover preparation
-- conditional execution
-
-instead of simply selecting strongest received power.
-
----
-
-### Predictive Conditional Handover (CHO)
-
-Inspired by Release-18 NTN mobility concepts:
-
-Geometry preparation:
+### OrbitIQ-LHT Decision Rule
 
 ```math
-D_1 > T_1 + H
-```
-
-```math
-D_2 < T_2 - H
-```
-
-Combined with:
-
-```math
-NeighborSINR > Threshold
-```
-
-Extended with:
-
-- future SINR prediction
-- quality scoring
-- beam persistence
-- RF protection logic
-
----
-
-## RF Propagation Models
-
-### Free Space Path Loss
-
-```math
-FSPL(dB)=32.45+20log_{10}(d)+20log_{10}(f)
+P_T(t) > P_S(t) + HOM + \Gamma_{S,T}
 ```
 
 ---
 
-### Atmospheric Loss
+## OrbitIQ Digital Twin
 
-```math
-L_{atm}=
-0.08/\sin(elevation)
-```
+Features:
 
----
-
-### Doppler Shift
-
-```math
-f_d=
-v_r/\lambda
-```
-
-Where:
-
-| Parameter | Description |
-|---|---|
-| \(v_r\) | radial relative velocity |
-| \(\lambda\) | carrier wavelength |
+- Satellite visualization
+- Beam footprints
+- SINR heat layers
+- UE clusters
+- Mobility arcs
+- Handover trajectories
+- AI decision engine
+- Connectivity risk estimation
 
 ---
 
-### Propagation Delay
+## Vision
 
-```math
-Delay=
-distance/c
-```
+> Google Maps for Satellite Connectivity
 
----
+Predict:
 
-## Advanced UE Beamforming
-
-### Sub-6 GHz UE
-
-| Parameter | Value |
-|---|---:|
-| Panels | 1 |
-| Array | 1×2 |
-| Element gain | Omni |
-| Noise figure | 7 dB |
-
----
-
-### Ku/Ka UE
-
-| Parameter | Value |
-|---|---:|
-| Panels | 2 |
-| Array | 2×4 |
-| Element gain | 5 dBi |
-| Orientation | 0° /180° |
-| Noise figure | 10 dB |
-
----
-
-### UE Gain
-
-```math
-G_{UE}
-=
-G_{element}
-+
-G_{array}
-```
-
----
-
-# Results & Validation
-
-The proposed framework was evaluated using a **3-satellite LEO NTN constellation** with:
-
-- Earth-Moving Cell (EMC) beam evolution
-- Multi-satellite mobility
-- Release-18 inspired Conditional Handover (CHO)
-- Future-SINR prediction
-- RF protection mechanisms
-
-Simulation output demonstrated successful satellite transitions:
-
-```text
-S1 → S2 → S3
-```
-
-instead of unrealistic static attachment behavior.
-
----
-
-## Simulation Configuration
-
-| Parameter | Value |
-|---|---:|
-| Carrier Frequency | 2 GHz |
-| Bandwidth | 5 MHz |
-| Altitude | 1500 km |
-| Duration | 300 sec |
-| Satellites | 3 |
-| Satellite spacing | 150 sec |
-| Users | 100 |
-| Conditional HO | Enabled |
-| Future-SINR prediction | Enabled |
-| EMC moving cells | Enabled |
-
----
-
-## Key Performance Indicators
-
-| Metric | Result |
-|---|---:|
-| Average SINR | **35.97 dB** |
-| Average Elevation | **86.49°** |
-| Average Off-axis Angle | **2.45°** |
-| Average Delay | **5.01 ms** |
-| Total Handovers | **588** |
-| Predictive CHO events | **30** |
-| Outage Users | **0** |
-| Highest SINR | **42.37 dB** |
-
----
-
-## Link Quality Distribution
-
-| MCS | Users |
-|---|---:|
-| 256QAM | 100 |
-
-The framework maintained:
-
-- 100% high-quality connectivity
-- zero outage users
-- stable high-order modulation
-
-This indicates effective beam selection and mobility control. :contentReference[oaicite:1]{index=1}
-
----
-
-# Satellite Mobility Evolution
-
-The serving satellite dynamically evolved during simulation:
-
-| Time (s) | S1 | S2 | S3 |
-|---|---:|---:|---:|
-| 0 |100|0|0|
-| 80 |51|49|0|
-|100 |1|99|0|
-|110 |0|100|0|
-|220 |0|75|25|
-|230 |0|44|56|
-|250 |0|0|100|
-|300 |0|0|100|
-
-Observed mobility path:
-
-```text
-Initial state
-
-S1
- ↓
-
-Mid-orbit transition
-
-S2
- ↓
-
-Final transition
-
-S3
-```
-
-This behavior resembles realistic LEO mobility where users are continuously transferred across moving satellite footprints. :contentReference[oaicite:2]{index=2}
-
----
-
-# Handover Intelligence
-
-| Trigger Reason | Events |
-|---|---:|
-| Future-SINR Predictive CHO | 30 |
-| RF Fallback Beam Selection | 465 |
-| RF Link Protection | 93 |
-| Stay on Serving Beam | 2412 |
-
-The system avoided unnecessary handovers while still performing predictive mobility actions when future beam quality degradation was detected. :contentReference[oaicite:3]{index=3}
-
----
-
-# Average SINR by Satellite
-
-| Satellite | Average SINR |
-|---|---:|
-| S1 |24.39 dB|
-| S2 |24.80 dB|
-| S3 |26.45 dB|
-
-Performance remained stable across satellite transitions with minimal quality degradation. :contentReference[oaicite:4]{index=4}
-
----
-
-## Key Observations
-
-✓ Multi-satellite transitions successfully modeled  
-✓ Earth-Moving Cell behavior validated  
-✓ Predictive mobility triggered successfully  
-✓ No user outages observed  
-✓ Stable beam quality maintained  
-✓ Future-SINR based CHO operational  
-
----
-
-## Generated Outputs
-
-```text
-advanced_ntn_results.csv
-
-final_ue_sinr_by_beam.png
-final_sinr_histogram.png
-sinr_vs_off_axis.png
-sinr_vs_elevation.png
-sinr_vs_doppler.png
-avg_sinr_over_time.png
-handover_events_over_time.png
-d2_sinr_cho_triggers_over_time.png
-```
-
----
-
-## Example Results
-
-Typical output:
-
-```text
-Serving Satellite Evolution:
-
-S1 → S2 → S3
-
-Average SINR: 36 dB
-Average Off-axis: 2°
-Outages: 0
-CHO events: 30
-```
+- where connectivity exists
+- where service degrades
+- where handovers occur
+- where outages emerge
+- where connectivity intelligence should act
 
 ---
 
@@ -390,35 +114,11 @@ CHO events: 30
 ```bash
 orbitiq-ntn-connectivity-intelligence/
 
+├── app.py
+├── orbitiq_digital_twin_engine.py
 ├── ntn_beam_calibration_multisat.py
-├── README.md
 ├── requirements.txt
-├── .gitignore
-├── advanced_ntn_results.csv
+├── README.md
+├── LICENSE
 ├── assets/
-├── plots/
 ```
-
----
-
-
-## References
-
-**3GPP TR 38.811**  
-Study on New Radio (NR) to support Non-Terrestrial Networks
-
-**3GPP Release-18 NTN Mobility Studies**
-
-**R1-1802551**  
-UE Antenna Assumption and Beam Modeling for NTN
-
-**R1-1802613**  
-NTN NR Impacts on HARQ Operation
-
-**R1-1806750**  
-Considerations on Random Access for NTN
-
-**O-RAN Alliance**
-Use Cases and AI/ML Architecture Specifications
-
----
