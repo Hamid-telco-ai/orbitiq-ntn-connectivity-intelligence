@@ -1,8 +1,7 @@
 # OrbitIQ NTN Connectivity Intelligence
 
-<p align="center">
-<img src="assets/orbitiq_banner.png" width="100%">
-</p>
+<img width="1536" height="1024" alt="7f085692-3ebe-45a1-b9ab-93aa17fe5827" src="https://github.com/user-attachments/assets/da06c0dc-a6c9-463d-8bf7-1be64c84b31d" />
+
 
 <p align="center">
 <b>From Coverage Visibility → Connectivity Intelligence</b>
