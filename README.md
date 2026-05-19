@@ -1,6 +1,7 @@
 # OrbitIQ NTN Connectivity Intelligence
 
-<img width="1536" height="1024" alt="7f085692-3ebe-45a1-b9ab-93aa17fe5827" src="https://github.com/user-attachments/assets/da06c0dc-a6c9-463d-8bf7-1be64c84b31d" />
+<img width="1536" height="1024" alt="0420f6a5-1f5c-4073-9336-3e681744a437" src="https://github.com/user-attachments/assets/7c9c6738-5fdf-4ca8-8a54-f78cca81e8d0" />
+
 
 
 <p align="center">
